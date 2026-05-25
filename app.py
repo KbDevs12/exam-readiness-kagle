@@ -8,6 +8,7 @@ from models import Adaline, BackpropANN
 from pipeline import load_and_prepare
 from preprocessing import denormalize_exam_score, prepare_user_input
 from recommendation import make_recommendations, status_from_score
+from training_utils import compare_learning_rates
 
 
 @st.cache_resource
@@ -19,8 +20,9 @@ def train_models():
 
     adaline = Adaline(input_size=X.shape[1], seed=11)
     adaline_loss = adaline.train(X, y_risk, epochs=1200, lr=0.02)
+    lr_comparison = compare_learning_rates(X, y_score, input_size=X.shape[1])
 
-    return df, X, y_score, y_risk, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss
+    return df, X, y_score, y_risk, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss, lr_comparison
 
 
 def plot_loss(loss, title):
@@ -45,7 +47,7 @@ def main():
             default_index=0,
         )
 
-    df, X, y_score, y_risk, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss = train_models()
+    df, X, y_score, y_risk, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss, lr_comparison = train_models()
 
     st.title("Exam Readiness Predictor")
     st.caption("Backpropagation ANN + Adaline using Kaggle Student Habits dataset")
@@ -135,6 +137,18 @@ def main():
             st.pyplot(plot_loss(adaline_loss, "MSE Adaline"))
             st.write(f"MSE awal: {adaline_loss[0]:.6f}")
             st.write(f"MSE akhir: {adaline_loss[-1]:.6f}")
+
+        st.subheader("Learning Rate Comparison")
+        fig, ax = plt.subplots(figsize=(8, 4))
+        for lr, loss in lr_comparison.items():
+            ax.plot(loss, label=f"lr={lr}")
+        ax.set_title("Perbandingan Learning Rate Backpropagation")
+        ax.set_xlabel("Epoch")
+        ax.set_ylabel("MSE")
+        ax.grid(True, linestyle="--", alpha=0.5)
+        ax.legend()
+        st.pyplot(fig)
+        st.write("Learning rate kecil cenderung stabil tetapi lebih lambat, sedangkan learning rate besar dapat mempercepat penurunan error tetapi berisiko tidak stabil.")
 
     else:
         st.header("About")
