@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs/temp
+*.log
+.tmp/
+
+# Downloaded Kaggle data can be large; keep sample preview only
+# Uncomment the next line if the CSV is too large for submission.
+# data/student_habits_kaggle.csv
