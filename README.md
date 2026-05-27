@@ -24,7 +24,6 @@ python download_dataset.py
 
 Jika komputer belum terhubung internet, aplikasi tetap bisa dibuka memakai file preview `data/sample_student_habits_preview.csv`. Untuk laporan final, gunakan dataset Kaggle asli dengan menjalankan `python download_dataset.py`.
 
-
 ## Dataset
 
 Dataset utama: **Student Habits vs Academic Performance** dari Kaggle.
@@ -42,6 +41,7 @@ Aplikasi memanggil `kagglehub.dataset_download()` untuk mengambil dataset.
 ```txt
 exam-readiness-kaggle/
 ├── app.py
+├── check-environment.py
 ├── data_loader.py
 ├── preprocessing.py
 ├── pipeline.py
