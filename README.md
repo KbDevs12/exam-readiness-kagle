@@ -60,11 +60,3 @@ exam-readiness-kaggle/
     ├── deployment-guide.md
     └── project-report-notes.md
 ```
-
-## Push ke GitHub
-
-```bash
-git remote add origin https://github.com/USERNAME/exam-readiness-kaggle.git
-git branch -M main
-git push -u origin main
-```
