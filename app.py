@@ -89,11 +89,32 @@ def main():
                 predicted_score = float(denormalize_exam_score(ann.predict(X_new))[0][0])
                 risk_probability = float(adaline.predict_score(X_new)[0])
                 status, explanation = status_from_score(predicted_score, risk_probability)
+                
+                status_label = {
+                    "High Risk": "High",
+                    "Medium Risk": "Medium",
+                    "Low Risk": "Low"
+                }.get(status, status)
 
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Predicted Exam Score", f"{predicted_score:.1f}")
-                col2.metric("High Risk Probability", f"{risk_probability * 100:.1f}%")
-                col3.metric("Risk Status", status)
+                col1.metric(
+                    label="Exam Score",
+                    value=f"{predicted_score:.1f}",
+                    help="Predicted Exam Score: estimasi nilai ujian berdasarkan input kebiasaan belajar dan gaya hidup.",
+                    label_visibility="visible",
+                )
+                col2.metric(
+                    label="Risk Prob.",
+                    value=f"{risk_probability:.1%}",
+                    help="Predicted Risk Probability: estimasi probabilitas performa rendah berdasarkan model Adaline.",
+                    label_visibility="visible",
+                )
+                col3.metric(
+                    label="Status",
+                    value=status_label,
+                    help=f"Risk Status: {status}. Status ditentukan dari predicted exam score dan probabilitas risiko.",
+                    label_visibility="visible",
+                )
 
                 st.progress(min(max(predicted_score / 100, 0), 1))
                 if status == "High Risk":
