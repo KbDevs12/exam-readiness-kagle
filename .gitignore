@@ -22,6 +22,8 @@ Thumbs.db
 *.log
 .tmp/
 
+.devcontainer/
+
 # Downloaded Kaggle data can be large; keep sample preview only
 # Uncomment the next line if the CSV is too large for submission.
 # data/student_habits_kaggle.csv
