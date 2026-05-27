@@ -45,7 +45,7 @@ def main():
             default_index=0,
         )
 
-    df, X, y_score, y_risk, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss, lr_comparison = train_models()
+    df, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss, lr_comparison = train_models()
 
     st.title("Exam Readiness Predictor")
     st.caption("Backpropagation ANN + Adaline using Kaggle Student Habits dataset")
