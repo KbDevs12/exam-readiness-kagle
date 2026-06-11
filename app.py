@@ -20,7 +20,7 @@ def train_models():
     adaline_loss = adaline.train(X, y_risk, epochs=1200, lr=0.02)
     lr_comparison = compare_learning_rates(X, y_score, input_size=X.shape[1])
 
-    return df, X, y_score, y_risk, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss, lr_comparison
+    return df, meta, source_message, is_preview, ann, adaline, ann_loss, adaline_loss, lr_comparison
 
 
 def plot_loss(loss, title):
